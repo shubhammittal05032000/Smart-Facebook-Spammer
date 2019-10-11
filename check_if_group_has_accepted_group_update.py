@@ -6,11 +6,11 @@ import sys
 import urllib.request
 from time import sleep
 
-from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 
 # -------------------------------------------------------------
@@ -65,14 +65,17 @@ def find_in_file(list_of_current):
     transfer_links=[]
     while(i<len(lines)):
         if(i):
-            transfer_links.append(lines[i+1])
-            transfer_links.append(lines[i+2])
+            t0 = lines[i]
+            t1 = lines[i+1]
+            t2 = lines[i+2]
+            transfer_links.append(t1)
+            transfer_links.append(t2)
         else:
-            still_pending.append(lines[i])
-            still_pending.append(lines[i+1])
-            still_pending.append(lines[i+2])
+            still_pending.append(t0)
+            still_pending.append(t1)
+            still_pending.append(t2)
 
-        i=i+3
+        i+=3
         f1.close()
         #transfer_pending_groups(still_pending)
 
@@ -158,7 +161,7 @@ def login(email, password):
 
     ##################The work starts
     driver.get("https://www.facebook.com/bookmarks/groups/")
-    sleep(10)
+    sleep(20)
     get_current_groups()
 
     '''
